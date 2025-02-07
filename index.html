@@ -299,9 +299,9 @@ header p {
 
     <!-- Header -->
     <header>
-    <h1>ðŸ’¸ Best Deals & Discounts â€“ Amazon & Walmart! ðŸ›ï¸</h1>
-    <p>Looking for huge savings on top products? ðŸš€ We bring you the best discounts from Amazon & Walmartâ€”for men & women! ðŸ† Shop amazing deals on fashion, gadgets, home essentials & more! ðŸ›’ðŸ’¥</p>
-    <p><strong>ðŸ“Œ Save More â€“ Shop Smart! ðŸŽ¯</strong></p>
+    <h1>💸 Best Deals & Discounts – Amazon & Walmart! 🛍️</h1>
+    <p>Looking for huge savings on top products? 🚀 We bring you the best discounts from Amazon & Walmart—for men & women! 🏆 Shop amazing deals on fashion, gadgets, home essentials & more! 🛒💥</p>
+    <p><strong>📌 Save More – Shop Smart! 🎯</strong></p>
     <div class="logos">
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo">
         <img src="https://benjamindreyer.com/wp-content/uploads/2020/08/Walmart-Logo-PNG-Transparent.png" alt="Walmart Logo">
@@ -366,17 +366,17 @@ header p {
                     <p>${product.description}</p>
                     <div class="rating">
                         <div class="stars">
-                            <span data-rating="1">â˜…</span>
-                            <span data-rating="2">â˜…</span>
-                            <span data-rating="3">â˜…</span>
-                            <span data-rating="4">â˜…</span>
-                            <span data-rating="5">â˜…</span>
+                            <span data-rating="1">★</span>
+                            <span data-rating="2">★</span>
+                            <span data-rating="3">★</span>
+                            <span data-rating="4">★</span>
+                            <span data-rating="5">★</span>
                         </div>
                         <span>(${product.reviews} reviews)</span>
                     </div>
                     <a href="${product.link}" target="_blank">Shop Now</a>
                     <div class="reviews">
-                        ${product.userReviews ? product.userReviews.map(review => `<p>${review.rating} â˜… - ${review.comment}</p>`).join('') : ''}
+                        ${product.userReviews ? product.userReviews.map(review => `<p>${review.rating} ★ - ${review.comment}</p>`).join('') : ''}
                     </div>
                 `;
                 productsContainer.appendChild(productElement);
@@ -402,7 +402,7 @@ header p {
                 }
                 product.userReviews.push({
                     rating: rating,
-                    comment: "User review", // ÙŠÙ…ÙƒÙ†Ùƒ Ø¥Ø¶Ø§ÙØ© Ø­Ù‚Ù„ Ù„Ù„ØªØ¹Ù„ÙŠÙ‚ Ø¥Ø°Ø§ Ù„Ø²Ù… Ø§Ù„Ø£Ù…Ø±
+                    comment: "User review", // يمكنك إضافة حقل للتعليق إذا لزم الأمر
                 });
                 localStorage.setItem('products', JSON.stringify(products));
                 loadProducts();
@@ -412,7 +412,7 @@ header p {
 
         // Load products on page load
         window.onload = loadProducts;
-		// ØªØ­Ù‚Ù‚ Ù…Ù…Ø§ Ø¥Ø°Ø§ ÙƒØ§Ù†Øª Ù‡Ù†Ø§Ùƒ Ù…Ù†ØªØ¬Ø§Øª Ù…Ø®Ø²Ù†Ø© Ù…Ø³Ø¨Ù‚Ù‹Ø§
+		// تحقق مما إذا كانت هناك منتجات مخزنة مسبقًا
 if (!localStorage.getItem('products')) {
     const initialProducts = [
         {
@@ -437,7 +437,7 @@ if (!localStorage.getItem('products')) {
     localStorage.setItem('products', JSON.stringify(initialProducts));
 }
 function addReview(productId, rating) {
-    const comment = prompt("Please enter your review comment:"); // Ø·Ù„Ø¨ ØªØ¹Ù„ÙŠÙ‚ Ù…Ù† Ø§Ù„Ù…Ø³ØªØ®Ø¯Ù…
+    const comment = prompt("Please enter your review comment:"); // طلب تعليق من المستخدم
     if (comment) {
         const products = JSON.parse(localStorage.getItem('products')) || [];
         const product = products.find(p => p.id === productId);
@@ -447,7 +447,7 @@ function addReview(productId, rating) {
             }
             product.userReviews.push({
                 rating: rating,
-                comment: comment, // Ø­ÙØ¸ Ø§Ù„ØªØ¹Ù„ÙŠÙ‚
+                comment: comment, // حفظ التعليق
             });
             localStorage.setItem('products', JSON.stringify(products));
             loadProducts();
@@ -455,7 +455,7 @@ function addReview(productId, rating) {
         }
     }
 }
-let visibleProducts = 4; // Ø¹Ø¯Ø¯ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ù…Ø¹Ø±ÙˆØ¶Ø© ÙÙŠ Ø§Ù„Ø¨Ø¯Ø§ÙŠØ©
+let visibleProducts = 4; // عدد المنتجات المعروضة في البداية
 const loadMoreButton = document.getElementById('loadMore');
 
 function loadProducts() {
@@ -463,7 +463,7 @@ function loadProducts() {
     const productsContainer = document.getElementById('productsContainer');
     productsContainer.innerHTML = '';
 
-    // Ø¹Ø±Ø¶ Ø¹Ø¯Ø¯ Ù…Ø­Ø¯ÙˆØ¯ Ù…Ù† Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª
+    // عرض عدد محدود من المنتجات
     const visibleItems = products.slice(0, visibleProducts);
     visibleItems.forEach((product) => {
         const productElement = document.createElement('div');
@@ -474,11 +474,11 @@ function loadProducts() {
             <p>${product.description}</p>
             <div class="rating">
                 <div class="stars">
-                    <span data-rating="1">â˜…</span>
-                    <span data-rating="2">â˜…</span>
-                    <span data-rating="3">â˜…</span>
-                    <span data-rating="4">â˜…</span>
-                    <span data-rating="5">â˜…</span>
+                    <span data-rating="1">★</span>
+                    <span data-rating="2">★</span>
+                    <span data-rating="3">★</span>
+                    <span data-rating="4">★</span>
+                    <span data-rating="5">★</span>
                 </div>
                 <span>(${product.reviews} reviews)</span>
             </div>
@@ -487,7 +487,7 @@ function loadProducts() {
         productsContainer.appendChild(productElement);
     });
 
-    // Ø¥Ø¸Ù‡Ø§Ø± Ø²Ø± "Load More" Ø¥Ø°Ø§ ÙƒØ§Ù† Ù‡Ù†Ø§Ùƒ Ø§Ù„Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª
+    // إظهار زر "Load More" إذا كان هناك المزيد من المنتجات
     if (visibleProducts < products.length) {
         loadMoreButton.style.display = 'block';
     } else {
@@ -495,15 +495,15 @@ function loadProducts() {
     }
 }
 
-// ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ø¹Ù†Ø¯ Ø§Ù„Ù†Ù‚Ø± Ø¹Ù„Ù‰ Ø§Ù„Ø²Ø±
+// تحميل المزيد من المنتجات عند النقر على الزر
 loadMoreButton.addEventListener('click', () => {
-    visibleProducts += 4; // Ø²ÙŠØ§Ø¯Ø© Ø¹Ø¯Ø¯ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ø§Ù„Ù…Ø¹Ø±ÙˆØ¶Ø©
+    visibleProducts += 4; // زيادة عدد المنتجات المعروضة
     loadProducts();
 });
 
-// ØªØ­Ù…ÙŠÙ„ Ø§Ù„Ù…Ù†ØªØ¬Ø§Øª Ø¹Ù†Ø¯ ÙØªØ­ Ø§Ù„ØµÙØ­Ø©
+// تحميل المنتجات عند فتح الصفحة
 window.onload = loadProducts;
-// ØªØ­Ù‚Ù‚ Ù…Ù…Ø§ Ø¥Ø°Ø§ ÙƒØ§Ù†Øª Ù‡Ù†Ø§Ùƒ Ù…Ù†ØªØ¬Ø§Øª Ù…Ø®Ø²Ù†Ø© Ù…Ø³Ø¨Ù‚Ù‹Ø§
+// تحقق مما إذا كانت هناك منتجات مخزنة مسبقًا
 if (!localStorage.getItem('products')) {
     const initialProducts = [
         {
