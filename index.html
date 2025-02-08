@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -414,27 +415,7 @@ header p {
         window.onload = loadProducts;
 		// تحقق مما إذا كانت هناك منتجات مخزنة مسبقًا
 if (!localStorage.getItem('products')) {
-    const initialProducts = [
-        {
-            id: 1,
-            name: "Wireless Headphones",
-            description: "High-quality wireless headphones with noise cancellation.",
-            link: "",
-            image: "",
-            rating: 4.5,
-            reviews: 1200,
-        },
-        {
-            id: 2,
-            name: "Smart Watch",
-            description: "Latest smartwatch with heart rate monitoring and GPS.",
-            link: "",
-            image: "",
-            rating: 4.2,
-            reviews: 800,
-        },
-    ];
-    localStorage.setItem('products', JSON.stringify(initialProducts));
+    
 }
 function addReview(productId, rating) {
     const comment = prompt("Please enter your review comment:"); // طلب تعليق من المستخدم
@@ -455,7 +436,7 @@ function addReview(productId, rating) {
         }
     }
 }
-let visibleProducts = 4; // عدد المنتجات المعروضة في البداية
+let visibleProducts = 100; // عدد المنتجات المعروضة في البداية
 const loadMoreButton = document.getElementById('loadMore');
 
 function loadProducts() {
@@ -505,27 +486,7 @@ loadMoreButton.addEventListener('click', () => {
 window.onload = loadProducts;
 // تحقق مما إذا كانت هناك منتجات مخزنة مسبقًا
 if (!localStorage.getItem('products')) {
-    const initialProducts = [
-        {
-            id: 1,
-            name: "Wireless Headphones",
-            description: "High-quality wireless headphones with noise cancellation.",
-            link: "",
-            image: "",
-            rating: 4.5,
-            reviews: 1200,
-        },
-        {
-            id: 2,
-            name: "Smart Watch",
-            description: "Latest smartwatch with heart rate monitoring and GPS.",
-            link: "",
-            image: "",
-            rating: 4.2,
-            reviews: 800,
-        },
-    ];
-    localStorage.setItem('products', JSON.stringify(initialProducts));
+    
 }
     </script>
 </body>
