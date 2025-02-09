@@ -286,7 +286,7 @@
         }
 
         // Add product function
-        function addProduct() {
+        async function addProduct() {
     if (!isLoggedIn) {
         alert('You must be logged in to add a product!');
         return;
@@ -299,19 +299,30 @@
 
     if (productName && productDescription && productLink && productImage) {
         const reader = new FileReader();
-        reader.onload = function (e) {
+        reader.onload = async function (e) {
             const product = {
                 id: Date.now(),
                 name: productName,
                 description: productDescription,
                 link: productLink,
                 image: e.target.result,
-                timestamp: Date.now(), // <-- إضافة هذا السطر
+                ...generateRandomRatings(),
             };
-            const products = JSON.parse(localStorage.getItem('products')) || [];
-            products.push(product);
-            localStorage.setItem('products', JSON.stringify(products));
-            alert('Product added successfully!');
+
+            // إرسال المنتج إلى الخادم
+            const response = await fetch('http://localhost:3000/products', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(product),
+            });
+
+            if (response.ok) {
+                alert('Product added successfully!');
+            } else {
+                alert('Failed to add product!');
+            }
         };
         reader.readAsDataURL(productImage);
     } else {

@@ -270,36 +270,46 @@
 
     <script>
         // Load products function
-        function loadProducts() {
-    const products = JSON.parse(localStorage.getItem('products')) || [];
-    const productsContainer = document.getElementById('productsContainer');
-    productsContainer.innerHTML = '';
-
-    // فلترة المنتجات التي مضى عليها أقل من 24 ساعة
-    const currentTime = Date.now();
-    const validProducts = products.filter(product => currentTime - product.timestamp < 24 * 60 * 60 * 1000);
-
-    // تحديث localStorage بالمنتجات الصالحة فقط
-    localStorage.setItem('products', JSON.stringify(validProducts));
-
-    // عرض المنتجات الصالحة
-    validProducts.forEach((product) => {
-        const productElement = document.createElement('div');
-        productElement.classList.add('product');
-        productElement.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <a href="${product.link}" target="_blank">Shop Now</a>
-        `;
-        productsContainer.appendChild(productElement);
-    });
+        // تحميل المنتجات من الخادم
+function loadProducts() {
+    fetch('http://localhost:3000/products')
+        .then(response => response.json())
+        .then(products => {
+            const productsContainer = document.getElementById('productsContainer');
+            productsContainer.innerHTML = '';
+            products.forEach((product) => {
+                const productElement = document.createElement('div');
+                productElement.classList.add('product');
+                productElement.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <div class="rating">
+                        <div class="stars">
+                            <span data-rating="1">★</span>
+                            <span data-rating="2">★</span>
+                            <span data-rating="3">★</span>
+                            <span data-rating="4">★</span>
+                            <span data-rating="5">★</span>
+                        </div>
+                        <span>(${product.reviews} reviews)</span>
+                    </div>
+                    <a href="${product.link}" target="_blank">Shop Now</a>
+                `;
+                productsContainer.appendChild(productElement);
+            });
+        });
 }
 
-        // Load products on page load
-        window.onload = loadProducts;
+// الاشتراك في التحديثات من الخادم
+const eventSource = new EventSource('http://localhost:3000/events');
+eventSource.onmessage = function (event) {
+    const product = JSON.parse(event.data);
+    loadProducts(); // تحديث قائمة المنتجات عند استلام تحديث جديد
+};
 
-		
+// تحميل المنتجات عند تحميل الصفحة
+window.onload = loadProducts;
     </script>
 </body>
 </html>
